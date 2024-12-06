@@ -8,6 +8,7 @@ public class MyString {
         System.out.println(countChar(hello, 'l'));
         System.out.println(countChar(hello, 'z'));
         System.out.println(spacedString(hello));
+        System.out.println(subsetOf("pass","space"));
         //// Put your other tests here.
     }
 
@@ -41,17 +42,28 @@ public class MyString {
      * @return true is str1 is a subset of str2, false otherwise
      */
     public static boolean subsetOf(String str1, String str2) {
-        if (str2.length() > str1.length()){
+        if (str1.length() > str2.length()){
             return false;
         }
-        for (int i = 0; i<str1.length()-str2.length() + 1; i++){
-           String strSubstring = str1.substring(i, i + str2.length());
-           if(strSubstring.equals(str2)){
+        int j = 0;
+        boolean isSubstring = false;
+        for (int i =0; i < str1.length(); i++)
+        {
+            j = 0;
+            isSubstring = false;
+            while (j < str2.length() && !isSubstring) {
+                if (str1.charAt(i) == str2.charAt(j)){
+                    isSubstring = true;
+                }
+                j ++;
+            }
+            if (!isSubstring){
+                return false;
+            }
+            str2 = str2.substring(0, j - 1) + str2.substring(j);
+            }
             return true;
-           }
         }
-        return false;
-    }
 
     /** Returns a string which is the same as the given string, with a space
      * character inserted after each character in the given string, except
@@ -62,6 +74,9 @@ public class MyString {
      * @return a string consisting of the characters of str, separated by spaces.
      */
     public static String spacedString(String str) {
+        if (str.length() == 0) {
+            return " ";
+        }
         String newStr = "";
         for(int i = 0; i < str.length() - 1; i++){
             newStr += str.charAt(i);
