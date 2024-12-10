@@ -67,10 +67,11 @@ public class Scrabble {
 		for (int i = 0; i < word.length(); i++){
 			wordScore += SCRABBLE_LETTER_VALUES[word.charAt(i) - 97];
 		}
+		wordScore = wordScore*word.length();
 		if (word.length() == HAND_SIZE){
 			wordScore += 50;
 		}
-		if (MyString.subsetOf(word, "runi")){
+		if (MyString.subsetOf("runi", word)){
 			wordScore += 1000;
 		}
 		return wordScore;
