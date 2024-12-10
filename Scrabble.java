@@ -37,6 +37,7 @@ public class Scrabble {
 	public static void init() {
 		// Declares the variable in to refer to an object of type In, and initializes it to represent
 		// the stream of characters coming from the given file. Used for reading words from the file.  
+		System.out.println("start to init");
 		In in = new In(WORDS_FILE);
         System.out.println("Loading word list from file...");
         NUM_OF_WORDS = 0;
@@ -52,7 +53,7 @@ public class Scrabble {
 	// Checks if the given word is in the dictionary.
 	public static boolean isWordInDictionary(String word) {
 		for (int i = 0; i < DICTIONARY.length; i++){
-			if(DICTIONARY[i] == word){
+			if(word.equals(DICTIONARY[i])){
 				return true;
 			}
 		}
@@ -104,13 +105,15 @@ public class Scrabble {
 			// non-whitespace characters. Whitespace is either space characters, or  
 			// end-of-line characters.
 			String input = in.readString();
-			if (input == ".") {
+			if (input.equals(".")) {
 				break;
 			}
 			if(!MyString.subsetOf(input, hand)){
+				System.out.println("error1");
 				break;
 			}
 			if (!isWordInDictionary(input)){
+				System.out.println("error2");
 				break;
 			}
 			score += wordScore(input);
@@ -119,7 +122,7 @@ public class Scrabble {
 		if (hand.length() == 0) {
 	        System.out.println("Ran out of letters. Total score: " + score + " points");
 		} else {
-			System.out.println("End of hand. Total score: " + score + " pointsssss");
+			System.out.println("End of hand. Total score: " + score + " points");
 		}
 	}
 
@@ -138,11 +141,12 @@ public class Scrabble {
 			// the user until the user enter the ENTER character.
 			String input = in.readString();
 			String newWord = "";
-			if (input == "e"){
+			if (input.equals("e")){
 				break;
 			}
-			if (input == "n"){
+			if (input.equals("n")){
 				newWord = createHand();
+				System.out.println(newWord);
 				playHand(newWord);
 			}
 
@@ -157,6 +161,9 @@ public class Scrabble {
 		////testCreateHands();  
 		////testPlayHands();
 		////playGame();
+		init();
+		System.out.println(isWordInDictionary("beton"));
+		playGame();
 	}
 
 	public static void testBuildingTheDictionary() {
