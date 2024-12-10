@@ -37,7 +37,6 @@ public class Scrabble {
 	public static void init() {
 		// Declares the variable in to refer to an object of type In, and initializes it to represent
 		// the stream of characters coming from the given file. Used for reading words from the file.  
-		System.out.println("start to init");
 		In in = new In(WORDS_FILE);
         System.out.println("Loading word list from file...");
         NUM_OF_WORDS = 0;
